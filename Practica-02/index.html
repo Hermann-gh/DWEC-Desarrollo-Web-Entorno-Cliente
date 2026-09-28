@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban Style</title>
+    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <!-- id sesion-->
+    <header>
+        <h1>Urban Style</h1>
+        <p id="sesion"></p>
+    </header>
+
+    <main>
+        <!-- Importante poner los id para despues poder añadir la logica-->
+        <section id="oferta">
+            <h2>Oferta Relámpago</h2>
+            <p>¡Descuento exclusivo por tiempo limitado!</p>
+
+            <p id="contador">15</p>
+
+            <button id="btn-oferta">
+                Activar Oferta Relámpago
+            </button>
+        </section>
+
+        <section id="carrito">
+            <h2>Carrito de compras</h2>
+
+            <div id="productos">
+                <!-- Aquí aparecerán los productos -->
+            </div>
+
+            <div id="resumen">
+                <p>Subtotal: <span id="subtotal">0,00 €</span></p>
+                <p>Descuento: <span id="descuento">0,00 €</span></p>
+                <p>IVA: <span id="iva">0,00 €</span></p>
+                <p>Total a Pagar: <span id="total">0,00 €</span></p>
+            </div>
+        </section>
+
+        <section id="opiniones">
+            <h2>Opiniones de los clientes</h2>
+
+            <form id="form-opinion">
+                <label for="comentario">Tu opinión:</label>
+
+                <textarea id="comentario" required></textarea>
+
+                <button type="submit">
+                    Enviar opinión
+                </button>
+            </form>
+
+            <div id="lista-opiniones">
+                <!-- Aquí aparecerán las reseñas -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Urban Style</p>
+    </footer>
+
+</body>
+</html>
