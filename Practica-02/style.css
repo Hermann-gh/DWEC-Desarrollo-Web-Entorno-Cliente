@@ -22,5 +22,71 @@ header {
 }
 
 header h1 {
-    -webkit-text-stroke: 0.5px #02977e;
+    -webkit-text-stroke: 0.3px #02977e;
+}
+
+/* Oferta relámpago */
+
+#oferta {
+    background-color: rgb(228, 39, 39);
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+#contador {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+#btn-oferta {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Carrito de compras */
+
+#carrito {
+    background-color: white;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#resumen {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
+#total {
+    font-weight: bold;
+    font-size: 20px;
+}
+/* Opiniones */
+
+#opiniones {
+    background-color: white;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#form-opinion {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#comentario {
+    min-height: 100px;
+    resize: vertical;
+}
+
+#comentario {
+    min-height: 100px;
+    resize: vertical;
 }
