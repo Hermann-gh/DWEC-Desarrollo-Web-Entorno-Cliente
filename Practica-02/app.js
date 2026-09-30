@@ -116,3 +116,38 @@ function activarOferta(){
 }
 
 document.getElementById('btn-oferta').addEventListener('click', activarOferta);
+
+//==FORMULARIO==
+
+//Variable para guardar el formulario
+let buzon = []; //Creamos array para guardar las opiniones
+
+//Intetamos recuperar las opiniones 
+try {
+    const opinionesGuardadas = localStorage.getItem('buzon');
+    if (opinionesGuardadas) {
+    buzon = JSON.parse(opinionesGuardadas);
+}
+//Si ocurre un error, evitamos que la aplicacion se detenga
+} catch (error) {
+    console.log('No se han podido recuperar las opiniones');
+}
+
+const formularioOpinion = document.getElementById('form-opinion');
+
+formularioOpinion.addEventListener('submit', (evento) => {
+    //Evitamos que se recargue la pagina al enviarlo
+    evento.preventDefault();
+    //Optenemos el comentario escrito por el usuario
+    const comentario = document.getElementById('comentario').value.trim();
+    //Creamos identificar de comentario usando fecha actual
+    const idOpinion = Date.now();
+    //Creamos objeto que llevara todo lo necesario
+    const opinion = {
+    id: idOpinion,
+    usuario: usuario,
+    fecha: new Date().toLocaleString('es-ES'),
+    comentario: comentario
+    };
+
+});
