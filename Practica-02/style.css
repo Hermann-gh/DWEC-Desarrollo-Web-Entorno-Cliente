@@ -90,3 +90,15 @@ header h1 {
     min-height: 100px;
     resize: vertical;
 }
+
+#btn-compra {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#mensaje-pedido {
+    font-weight: bold;
+}

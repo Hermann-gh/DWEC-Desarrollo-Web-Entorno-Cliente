@@ -31,7 +31,7 @@ const idClienteFormateado = idCliente.padStart(6,'0');
 //Usamos doble ?? para decir si es null usa el valor que hemos establecido 2, para que 0 no sea null.
 const regalos = parametros.get('regalos') ?? 2; 
 
-//Catalogo
+//==CATALOGO==
 
 const productos = [
     { nombre: 'Camiseta Urban', precio: '19.99€' },
@@ -60,38 +60,39 @@ for (const producto of productos) {
     subtotal += precio;
 }
 
-document.getElementById('subtotal').textContent = subtotal.toLocaleString('es-ES', {
-    style: 'currency',
-    currency: 'EUR'
-});
+//Funcion para formatear cantidades en euros
+function formatearEuro(cantidad) {
+    return cantidad.toLocaleString('es-ES', {
+        style: 'currency',
+        currency: 'EUR'
+    });
+}
 
-//Calculo financiero
+document.getElementById('subtotal').textContent = formatearEuro(subtotal);
+
+//==LOGICA PAGO==
 const cuponTexto = "10€";
 const cupon = parseFloat(cuponTexto);
 
-document.getElementById('cupon').textContent = cupon.toLocaleString('es-ES', {
-    style: 'currency',
-    currency: 'EUR'
-});
+document.getElementById('cupon').textContent = formatearEuro(cupon);
 
 const baseImponible = subtotal - cupon;
 const iva = baseImponible * 21 / 100; //Calculamos el IVA sobre la base ya que ahi estaria restado el cupon
 
-document.getElementById('iva').textContent = iva.toLocaleString('es-ES', {
-    style: 'currency',
-    currency: 'EUR'
-});
+document.getElementById('iva').textContent = formatearEuro(iva);
 
 const total = baseImponible + iva;
 
-const totalFormateado = total.toLocaleString('es-ES', {
-    style: 'currency',
-    currency: 'EUR'
-});
-
-document.getElementById('total').textContent = totalFormateado;
+document.getElementById('total').textContent = formatearEuro(total);
 
 let numeroPedido = 1; //Esta vez sera let para poder modficarse
+const botonCompra = document.getElementById('btn-compra');
+const mensajePedido = document.getElementById('mensaje-pedido');
+
+botonCompra.addEventListener('click', () => {
+    mensajePedido.textContent = `Pedido nº ${numeroPedido} realizado correctamente.`;
+    numeroPedido++;
+});
 
 //Promocion relampago
 let temporizador = null;
@@ -133,6 +134,7 @@ try {
     console.log('No se han podido recuperar las opiniones');
 }
 
+//Variable para señalar el formulario
 const formularioOpinion = document.getElementById('form-opinion');
 
 formularioOpinion.addEventListener('submit', (evento) => {
@@ -149,5 +151,36 @@ formularioOpinion.addEventListener('submit', (evento) => {
     fecha: new Date().toLocaleString('es-ES'),
     comentario: comentario
     };
-
+    //Añadimos la opinion al buzom
+    buzon.push(opinion);
+    //Mostramos la opnion aunque sea nueva
+    mostrarOpinion(opinion);
+    //Limpiamos el campo de comentario despues de enviarlo
+    document.getElementById('comentario').value = '';
+    //Intentamos guardar las opiniones en el almacenamiento
+    try {
+    //Guardamos el buzon en localStorage, tendremos que convertirlo primero a String
+    localStorage.setItem('buzon', JSON.stringify(buzon));
+    } catch (error) {
+        console.log('No se han podido guardar las opiniones');
+    }
 });
+
+//Variable para señalar la lista
+const listaOpiniones = document.getElementById('lista-opiniones');
+
+//Funcion para mostrar las opniones en pantalla
+function mostrarOpinion(opinion) {
+    //Creamos un elemento div para cada opinion
+    const elementoOpinion = document.createElement('div');
+    //Introducimos los datos de la opinion como texto
+    elementoOpinion.textContent = `${opinion.usuario} - ${opinion.fecha}: ${opinion.comentario}`;
+    //Añadimos la opnion a la lista
+    listaOpiniones.appendChild(elementoOpinion);
+}
+
+for( const opinion of buzon) {
+    //pasamos la funcion por cada opinion
+    mostrarOpinion(opinion);
+}
+
